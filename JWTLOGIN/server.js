@@ -186,6 +186,10 @@ router.post('/forgot', async function (req, res, next) {
     });
 });
 
+router.get("/",(req,res)=>{
+  res.send("Express server")
+})
+
 router.get("/protected",authVerify,(req,res)=>{
     res.send("I am protected route")
 })
