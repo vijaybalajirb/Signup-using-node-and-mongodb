@@ -67,10 +67,10 @@ async function authVerify(req,res,next) {
     const valid = tokenValidator(jwt)
     if(valid){
         next()
-        res.send("Access permitted")
+  res.status(200).json({message:"Protected routes can be accessed"})
 
     }else{
-        res.send("Access Denied")
+  res.status(500).json({message:"Protected routes cannot be accessed"})
     }
     }catch(error){
         res.send(error)
@@ -187,7 +187,7 @@ router.post('/forgot', async function (req, res, next) {
 });
 
 router.get("/protected",authVerify,(req,res)=>{
-    res.send("I am protected route")
+  res.status(200).json({message:"I am from Protected route"})
 })
 
 router.get("/",(req,res)=>{
