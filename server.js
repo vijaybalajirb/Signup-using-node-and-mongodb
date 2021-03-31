@@ -11,7 +11,7 @@ const nodemailer = require('nodemailer');
 const Mail = require('nodemailer/lib/mailer');
 router.use(cookieParser())
 router.use(express.json())
-router.use(cors({ origin: true, credentials: true }))
+router.use(cors())
 dotenv.config()
 
 
@@ -116,7 +116,7 @@ router.post("/login",async(req,res)=> {
               res.status(500).json({message:"Username or password is incorrect"})
         }else {
             const token = await tokenGenerator(record.email)
-            res.cookie("jwt",token)
+            res.cookie("jwt",token,{httpOnly:true})
             res.status(200).json({message:"Login Successful"})
         }
         }
