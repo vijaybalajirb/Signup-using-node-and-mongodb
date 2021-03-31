@@ -11,7 +11,7 @@ const nodemailer = require('nodemailer');
 const Mail = require('nodemailer/lib/mailer');
 router.use(cookieParser())
 router.use(express.json())
-router.use(cors())
+router.use(cors({ origin: true, credentials: true }))
 dotenv.config()
 
 
