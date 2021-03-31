@@ -117,10 +117,6 @@ router.post("/login",async(req,res)=> {
         }else {
             const token = await tokenGenerator(record.email)
             res.cookie("jwt",token)
-              res.writeHead(200, {
-              "Set-Cookie": "JWT=token; HttpOnly",
-              "Access-Control-Allow-Credentials": "true"
-            })
             res.status(200).json({message:"Login Successful"})
         }
         }
