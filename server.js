@@ -108,7 +108,6 @@ router.post("/login",async(req,res)=> {
         const client = await mongoClient.connect(DB_URL,{ useNewUrlParser: true, useUnifiedTopology: true })
         const db = client.db('Login_register')
         const record = await db.collection('login').findOne({ email: req.body.email });
-        client.close()
         if(!record){
           res.status(404).json({message:"User not found"})
         }else {
@@ -118,10 +117,14 @@ router.post("/login",async(req,res)=> {
         }else {
             const token = await tokenGenerator(record.email)
             res.cookie("jwt",token)
+              res.writeHead(200, {
+              "Set-Cookie": "JWT=token; HttpOnly",
+              "Access-Control-Allow-Credentials": "true"
+            })
             res.status(200).json({message:"Login Successful"})
         }
         }
-
+        client.close()
     }catch(error){
             console.log(error)
     }
