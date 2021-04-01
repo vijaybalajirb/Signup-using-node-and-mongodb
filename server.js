@@ -162,7 +162,7 @@ router.post('/forgot', async function (req, res, next) {
       const result = await db.collection("login").findOneAndUpdate({ email: req.body.email }, { $set: { password: req.body.password } });
         console.log(req.body.email,req.body.password)
       if (!!result) {
-       await db.collection("login").findOneAndUpdate({ email: req.body.email }, { $unset: { random_string: 1 } });
+      // await db.collection("login").findOneAndUpdate({ email: req.body.email }, { $unset: { random_string: 1 } });
         res.json({ message: 'New password is set successfully', statusCode: 200 });
       } else {
         res.json({ message: 'The link is invalid , else you may used it earlier!', statusCode: 500 });
