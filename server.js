@@ -102,8 +102,7 @@ router.post("/login",async(req,res)=> {
               res.status(500).json({message:"Username or password is incorrect"})
         }else {
             const token = await tokenGenerator(record.email)
-            res.cookie("jwt",token,{httpOnly:true})
-            res.status(200).json({message:"Login Successful"})
+            res.status(200).json({message:"Login Successful",token})
         }
         }
         client.close()
