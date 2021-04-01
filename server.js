@@ -154,7 +154,7 @@ router.post('/forgot', async function (req, res, next) {
     });
   });
 
-  router.put('/reset', async function (req, res, next) {
+  router.put('/reset/:email', async function (req, res, next) {
     const client = await mongoClient.connect(DB_URL,{ useNewUrlParser: true, useUnifiedTopology: true })
   
     client.connect(async (err) => {
