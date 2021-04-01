@@ -51,31 +51,16 @@ const tokenGenerator = (email) => {
         return token;
 }
 
-const tokenValidator = (token) => {
-    try{
-        const data = jwt.verify(token,process.env.JWT_Security);
-        return data;
-
-    }catch(error){
-        return false;
-    }
-}
-
-async function authVerify(req,res,next) {
-    try{
-    const {jwt} = await req.cookies;
-    const valid = tokenValidator(jwt)
-    if(valid){
-        next()
-  res.status(200).json({message:"Protected routes can be accessed"})
-
-    }else{
-  res.status(500).json({message:"Protected routes cannot be accessed"})
-    }
-    }catch(error){
-        res.send(error)
-    }
-
+function authVerify(req,res,next){
+  if(req.headers.authorization !=undefined){
+    jwt.verify(req.headers.authorization,process.env.JWT_Security,(err,decode) => {
+      if(decode){
+        next();
+      }else{
+        res.status(500).json({message:"not authirizs"})
+      }
+    })
+  }
 }
 
 
