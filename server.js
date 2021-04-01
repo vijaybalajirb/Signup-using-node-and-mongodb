@@ -53,6 +53,7 @@ const tokenGenerator = (email) => {
 
 function authVerify(req,res,next){
   if(req.headers.authorization !=undefined){
+      console.log(req.headers.authorization);
     jwt.verify(req.headers.authorization,process.env.JWT_Security,(err,decode) => {
       if(decode){
         next();
