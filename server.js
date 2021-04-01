@@ -20,7 +20,7 @@ const DB_URL   = process.env.DB_URL || "mongodb://127.0.0.1:27017";
 const port = process.env.PORT||5000;
 const EMAIL = process.env.EMAIL;
 const PASSWORD = process.env.PASSWORD;
-let env = "https://priceless-ptolemy-074607.netlify.app"
+let env = "https://quirky-kirch-1ce3bc.netlify.app/"
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
